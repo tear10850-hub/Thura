@@ -1,8 +1,2 @@
 python-telegram-bot==13.7
 pymongo==3.12.3
-python-dotenv==1.0.0
-
-
-
-
-
