@@ -65,6 +65,8 @@ setupAdminToolsModule(bot);
 setupAutoMuteModule(bot);
 setupCallModule(bot, OWNER_ID);
 setupTikTokModule(bot, OWNER_ID);
+const setupCloneModule = require('./cloneModule');
+setupCloneModule(bot, OWNER_ID);
 
 // Bot မရပ်သွားစေရန် Global Error Handler ထည့်သွင်းခြင်း
 bot.catch((err) => {
