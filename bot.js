@@ -27,7 +27,6 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
 const SECOND_MONGO_URI = process.env.SECOND_MONGO_URI || process.env.MONGO_URI;
 const OWNER_ID = Number(process.env.OWNER_ID);
-const PORT = process.env.PORT || 3000;
 
 // Env Variables မပြည့်စုံပါက Error ထုတ်ပြီး အေးဆေး ရပ်တန့်မည်
 if (!BOT_TOKEN || !MONGO_URI || !OWNER_ID) {
