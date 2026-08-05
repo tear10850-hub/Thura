@@ -1,0 +1,17 @@
+{
+  "name": "telegram-smart-reply-bot",
+  "version": "1.0.0",
+  "description": "Telegram Smart Reply Bot for Render",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "grammy": "^1.21.1",
+    "mongoose": "^8.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
