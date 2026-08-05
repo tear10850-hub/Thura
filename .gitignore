@@ -1,0 +1,33 @@
+node_modules
+.env
+npm-debug.log
+
+models.js
+
+const mongoose = require('mongoose');
+
+// Owner မီဒီယာများ သိမ်းဆည်းရန် Schema
+const MediaSchema = new mongoose.Schema({
+  type: { 
+    type: String, 
+    enum: ['music', 'video', 'photo', 'sticker', 'audio', 'link'], 
+    required: true 
+  },
+  fileId: { type: String, required: true },
+  caption: { type: String, default: '' },
+  createdAt: { type: Date, default: Date.now }
+});
+
+// မန်ဘာများ၏ စာသား/Emoji များ သိမ်းဆည်းရန် Schema
+const TextReplySchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  fromUserId: { type: Number },
+  chatId: { type: Number },
+  lastUsedAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Media = mongoose.model('Media', MediaSchema);
+const TextReply = mongoose.model('TextReply', TextReplySchema);
+
+module.exports = { Media, TextReply };
