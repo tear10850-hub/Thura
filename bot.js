@@ -6,6 +6,7 @@ const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
 const setupPremiumKeyModule = require('./premiumKeyModule');
 const setupAdminToolsModule = require('./adminToolsModule');
+const setupAutoMuteModule = require('./autoMuteModule');
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
