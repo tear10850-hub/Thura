@@ -2,6 +2,9 @@ const express = require('express');
 const { Bot } = require('grammy');
 const mongoose = require('mongoose');
 const { Media, TextReply } = require('./models');
+const setupCloneModule = require('./cloneModule');
+
+function registerMainBotFunctions(botInstance) {
 const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
 const setupPremiumKeyModule = require('./premiumKeyModule');
@@ -9,7 +12,7 @@ const setupAdminToolsModule = require('./adminToolsModule');
 const setupAutoMuteModule = require('./autoMuteModule');
 const setupCallModule = require('./setupCallModule');
 const setupTikTokModule = require('./tiktokModule');
-const setupCloneModule = require('./cloneModule');
+}
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
