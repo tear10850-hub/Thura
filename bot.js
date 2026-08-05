@@ -57,6 +57,7 @@ setupLeaveModule(bot);
 setupPremiumKeyModule(bot);
 setupAdminToolsModule(bot);
 setupAutoMuteModule(bot);
+setupCallModule(bot, OWNER_ID);
 
 // Bot မရပ်သွားစေရန် Global Error Handler ထည့်သွင်းခြင်း
 bot.catch((err) => {
