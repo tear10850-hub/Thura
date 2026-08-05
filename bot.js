@@ -67,6 +67,8 @@ connectDB();
 // ၃. Telegram Bot Setup နှင့် Global Error Handling
 // ----------------------------------------------------
 const bot = new Bot(BOT_TOKEN);
+registerMainBotFunctions(bot);
+setupCloneModule(bot, OWNER_ID, registerMainBotFunctions);
 
 // Bot မရပ်သွားစေရန် Global Error Handler ထည့်သွင်းခြင်း
 bot.catch((err) => {
