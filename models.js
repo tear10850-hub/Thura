@@ -1,9 +1,3 @@
-node_modules
-.env
-npm-debug.log
-
-models.js
-
 const mongoose = require('mongoose');
 
 // Owner မီဒီယာများ သိမ်းဆည်းရန် Schema
