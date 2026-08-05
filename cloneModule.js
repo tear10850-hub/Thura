@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
   paidQuota: { type: Number, default: 0 }
 });
 
-const PremiumKey = mongoose.models.PremiumKey || mongoose.model('PremiumKey', keySchema);
-const UserProfile = mongoose.models.UserProfile || mongoose.model('UserProfile', userSchema);
+const PremiumKey = mongoose.models.PremiumKey || mongoose.model('PremiumKey_Clone', keySchema);
+const UserProfile = mongoose.models.UserProfile || mongoose.model('UserProfile_Clone', userSchema);
 
 // SECONDARY MONGO CONNECTION (Fallback to primary if not provided)
 const secondMongoUri = process.env.SECOND_MONGO_URI || process.env.MONGO_URI;
