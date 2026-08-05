@@ -10,7 +10,6 @@ const setupPremiumKeyModule = require('./premiumKeyModule');
 const setupAdminToolsModule = require('./adminToolsModule');
 const setupAutoMuteModule = require('./autoMuteModule');
 const setupCallModule = require('./setupCallModule');
-const setupTikTokModule = require('./tiktokModule');
 
 function registerMainBotFunctions(botInstance) {
   setupWelcomeModule(botInstance);
@@ -19,7 +18,6 @@ function registerMainBotFunctions(botInstance) {
   setupAdminToolsModule(botInstance);
   setupAutoMuteModule(botInstance);
   setupCallModule(botInstance, OWNER_ID);
-  setupTikTokModule(botInstance, OWNER_ID);
 }
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
