@@ -2,6 +2,7 @@ const express = require('express');
 const { Bot } = require('grammy');
 const mongoose = require('mongoose');
 const { Media, TextReply } = require('./models');
+const setupWelcomeModule = require('./welcomeModule');
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
