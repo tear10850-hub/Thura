@@ -17,6 +17,7 @@ const setupTikTokModule = require('./tiktokModule');
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
+const SECOND_MONGO_URI = process.env.SECOND_MONGO_URI;
 const OWNER_ID = Number(process.env.OWNER_ID);
 const PORT = process.env.PORT || 3000;
 
