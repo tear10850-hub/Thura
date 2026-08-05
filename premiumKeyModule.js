@@ -4,15 +4,15 @@ const OWNER_ID = Number(process.env.OWNER_ID);
 
 function setupPremiumKeyModule(bot) {
 
-  // 1. Owner သီးသန့် Key ထုတ်ယူသည့် Command (/Teach [Tear14567])
+  // 1. Owner Key ထုတ်ယူသည့် Command (/Teach [Tear12345678]) - ဂဏန်း ၈ လုံး
   bot.command('Teach', async (ctx) => {
     if (ctx.from.id !== OWNER_ID) return;
 
     const text = ctx.message.text.trim();
-    const match = text.match(/\/Teach\s+\[(Tear\d{5})\]/);
+    const match = text.match(/\/Teach\s+\[(Tear\d{8})\]/);
 
     if (!match) {
-      return ctx.reply("❌ Format မှားယွင်းနေပါသည်။\nဥပမာ- `/Teach [Tear14567]` (Tear နောက်တွင် ဂဏန်း ၅ လုံး ပါရမည်)");
+      return ctx.reply("❌ Format မှားယွင်းနေပါသည်။\nဥပမာ- `/Teach [Tear12345678]` (Tear နောက်တွင် ဂဏန်း ၈ လုံး ပါရမည်)");
     }
 
     const generatedKey = match[1];
@@ -25,7 +25,7 @@ function setupPremiumKeyModule(bot) {
     }
   });
 
-// 2. User မှ Bot Private Chat တွင် Key လာရောက် Activate ပြုလုပ်ခြင်း
+  // 2. Private Chat Activation
   bot.command('keyvideo', async (ctx) => {
     if (ctx.chat.type !== 'private') {
       return ctx.reply("ဤ Command ကို Bot ၏ Private Chat တွင်သာ အသုံးပြုပေးပါရှင့်။");
@@ -35,31 +35,27 @@ function setupPremiumKeyModule(bot) {
     const inputKey = args[1];
 
     if (!inputKey) {
-      return ctx.reply("❌ ကျေးဇူးပြု၍ Key ထည့်သွင်းပေးပါ။\nဥပမာ- `/keyvideo Tear14567`");
+      return ctx.reply("❌ ကျေးဇူးပြု၍ Key ထည့်သွင်းပေးပါ။\nဥပမာ- `/keyvideo Tear12345678`");
     }
 
     await ctx.reply("⏳စစ်ဆေးနေပါသည့်ရှင့်🍃");
 
     const keyDoc = await PremiumKey.findOne({ key: inputKey });
 
-    // Key မမှန်ပါက သို့မဟုတ် သုံးပြီးသားဖြစ်ပါက
     if (!keyDoc || keyDoc.isUsed) {
       return ctx.reply("ကျရူံး❌❌\nတောင်ပန်ပါတယ်ရှင့်keyအတုမရပါ။သုံးပီးသားမရပါရှင့်");
     }
 
-// Key မှန်ကန်ပါက တည်ရှိနေသော Group တစ်ခုခုတွင် Activated အဖြစ် သတ်မှတ်ရန် အကြောင်းကြားခြင်း
-    // အသုံးပြုသူသည် Group ထဲရောက်ပါက /activatevideo [Key] ဖြင့် Group အား Premium သတ်မှတ်နိုင်ပါသည်
-    ctx.session = ctx.session || {};
     await ctx.reply(
 `⏳စစ်ဆေးနေပါသည့်ရှင့်🍃
 အောင်မြင်✅✅
 သင်gpမှာယခုဆိုရင်
-Ban/Mute/Umuteတို့အတွက်videoထည့်နိုင်ပါသည်ရှင့်🤭(တစ်ခါဝယ်ထားရင်တစ်သက်စာပါရှင့်/သင်တစ်ဉီးသာဤGp၏ Ban/Mute/UMute =videoစနစ်ကိုထိမ်းချုပ်နိုင်ပါသည့်ရှင့်😊)
+Ban/Mute/Umute/AutoMute တို့အတွက် videoထည့်နိုင်ပါသည်ရှင့်🤭(တစ်ခါဝယ်ထားရင်တစ်သက်စာပါရှင့်/သင်တစ်ဉီးသာဤGp၏ Video စနစ်ကိုထိမ်းချုပ်နိုင်ပါသည့်ရှင့်😊)
 
 👉 မိမိ Premium ဖွင့်လိုသော Group ထဲသို့သွား၍ \`/activatevideo ${inputKey}\` ဟု ရိုက်ကူးပေးပါရှင့်။`, { parse_mode: 'Markdown' });
   });
 
-  // 3. Group ထဲတွင် Key ဖြင့် Premium ဖွင့်ခြင်း
+  // 3. Group Activation
   bot.command('activatevideo', async (ctx) => {
     if (ctx.chat.type === 'private') return;
 
@@ -74,23 +70,20 @@ Ban/Mute/Umuteတို့အတွက်videoထည့်နိုင်ပါ�
       return ctx.reply("ကျရူံး❌❌\nတောင်ပန်ပါတယ်ရှင့်keyအတုမရပါ။သုံးပီးသားမရပါရှင့်");
     }
 
-// Key ကို သုံးပြီးကြောင်း မှတ်သားမည်
     keyDoc.isUsed = true;
     keyDoc.usedBy = ctx.from.id;
     keyDoc.usedInChat = ctx.chat.id;
     await keyDoc.save();
 
-    // Group ကို Premium အဖြစ် သတ်မှတ်မည်
     await AdminToolsConfig.findOneAndUpdate(
       { chatId: ctx.chat.id },
       { isPremium: true, premiumOwnerId: ctx.from.id },
       { upsert: true, new: true }
     );
 
-    await ctx.reply("🎉 ယခု Group သည် Ban/Mute/Unmute Video Customization စနစ်အတွက် Premium အောင်မြင်စွာ ရရှိသွားပါပြီရှင့်။");
+    await ctx.reply("🎉 ယခု Group သည် Video Customization စနစ်အတွက် Premium အောင်မြင်စွာ ရရှိသွားပါပြီရှင့်။");
   });
 }
 
 module.exports = setupPremiumKeyModule;
-
 
