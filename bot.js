@@ -49,6 +49,7 @@ connectDB();
 // ----------------------------------------------------
 const bot = new Bot(BOT_TOKEN);
 setupWelcomeModule(bot);
+setupLeaveModule(bot);
 
 // Bot မရပ်သွားစေရန် Global Error Handler ထည့်သွင်းခြင်း
 bot.catch((err) => {
