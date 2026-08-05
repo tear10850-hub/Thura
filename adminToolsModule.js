@@ -158,4 +158,91 @@ Umutrလွှတ်ပေးသူ - ${operatorText}🤓`;
   // BAN VIDEO
   bot.command('bvideo', async (ctx) => {
     if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
-    
+    const replyMsg = ctx.message.reply_to_message;
+    if (!replyMsg || !replyMsg.video) return ctx.reply("ကျေးဇူးပြု၍ Video ကို Reply ထောက်ပြီး /bvideo ဟု ပို့ပါ။");
+
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { banVideoId: replyMsg.video.file_id }, { upsert: true });
+    await ctx.reply("Ban Video ကို အောင်မြင်စွာ သတ်မှတ်လိုက်ပါပြီ။");
+  });
+
+  bot.command('Dbvideo', async (ctx) => {
+    if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { banVideoId: null });
+    await ctx.reply("Ban Video ကို ဖျက်လိုက်ပါပြီ။");
+  });
+
+bot.command('bvd', async (ctx) => {
+    const config = await AdminToolsConfig.findOne({ chatId: ctx.chat.id });
+    if (config && config.banVideoId) {
+      await ctx.replyWithVideo(config.banVideoId, { caption: "လက်ရှိ သတ်မှတ်ထားသော Ban Video ဖြစ်ပါသည်။" });
+    } else {
+      await ctx.reply("Ban Video သတ်မှတ်ထားခြင်း မရှိသေးပါ။");
+    }
+  });
+
+  // MUTE VIDEO
+  bot.command('mvideo', async (ctx) => {
+    if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
+    const replyMsg = ctx.message.reply_to_message;
+    if (!replyMsg || !replyMsg.video) return ctx.reply("ကျေးဇူးပြု၍ Video ကို Reply ထောက်ပြီး /mvideo ဟု ပို့ပါ။");
+
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { muteVideoId: replyMsg.video.file_id }, { upsert: true });
+    await ctx.reply("Mute Video ကို အောင်မြင်စွာ သတ်မှတ်လိုက်ပါပြီ။");
+  });
+
+bot.command('Dmvideo', async (ctx) => {
+    if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { muteVideoId: null });
+    await ctx.reply("Mute Video ကို ဖျက်လိုက်ပါပြီ။");
+  });
+
+  bot.command('mvd', async (ctx) => {
+    const config = await AdminToolsConfig.findOne({ chatId: ctx.chat.id });
+    if (config && config.muteVideoId) {
+      await ctx.replyWithVideo(config.muteVideoId, { caption: "လက်ရှိ သတ်မှတ်ထားသော Mute Video ဖြစ်ပါသည်။" });
+    } else {
+      await ctx.reply("Mute Video သတ်မှတ်ထားခြင်း မရှိသေးပါ။");
+    }
+  });
+
+// UNMUTE VIDEO
+  bot.command('uvideo', async (ctx) => {
+    if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
+    const replyMsg = ctx.message.reply_to_message;
+    if (!replyMsg || !replyMsg.video) return ctx.reply("ကျေးဇူးပြု၍ Video ကို Reply ထောက်ပြီး /uvideo ဟု ပို့ပါ။");
+
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { unmuteVideoId: replyMsg.video.file_id }, { upsert: true });
+    await ctx.reply("Unmute Video ကို အောင်မြင်စွာ သတ်မှတ်လိုက်ပါပြီ။");
+  });
+
+  bot.command('Duvideo', async (ctx) => {
+    if (!(await hasVideoPermission(ctx))) return ctx.reply("❌ ဤ စနစ်ကို အသုံးပြုရန် Premium Key လိုအပ်ပါသည်ရှင့်။");
+    await AdminToolsConfig.findOneAndUpdate({ chatId: ctx.chat.id }, { unmuteVideoId: null });
+    await ctx.reply("Unmute Video ကို ဖျက်လိုက်ပါပြီ။");
+  });
+
+  bot.command('umvd', async (ctx) => {
+    const config = await AdminToolsConfig.findOne({ chatId: ctx.chat.id });
+    if (config && config.unmuteVideoId) {
+      await ctx.replyWithVideo(config.unmuteVideoId, { caption: "လက်ရှိ သတ်မှတ်ထားသော Unmute Video ဖြစ်ပါသည်။" });
+    } else {
+      await ctx.reply("Unmute Video သတ်မှတ်ထားခြင်း မရှိသေးပါ။");
+    }
+  });
+
+// ====================================================
+  // 3. INLINE BUTTON HANDLER (❌Gp Tear❌)
+  // ====================================================
+  bot.callbackQuery('delete_admin_msg', async (ctx) => {
+    try {
+      await ctx.deleteMessage();
+      await ctx.answerCallbackQuery({ text: "ဖျက်လိုက်ပါပြီ။" });
+    } catch (err) {
+      await ctx.answerCallbackQuery({ text: "ဖျက်၍ မရပါ သို့မဟုတ် စာသားဟောင်းနေပါပြီ။" });
+    }
+  });
+}
+
+module.exports = setupAdminToolsModule;
+
+
