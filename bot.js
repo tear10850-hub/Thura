@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const { Media, TextReply } = require('./models');
 const setupCloneModule = require('./cloneModule');
 
-function registerMainBotFunctions(botInstance) {
 const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
 const setupPremiumKeyModule = require('./premiumKeyModule');
@@ -12,13 +11,23 @@ const setupAdminToolsModule = require('./adminToolsModule');
 const setupAutoMuteModule = require('./autoMuteModule');
 const setupCallModule = require('./setupCallModule');
 const setupTikTokModule = require('./tiktokModule');
+
+function registerMainBotFunctions(botInstance) {
+  setupWelcomeModule(botInstance);
+  setupLeaveModule(botInstance);
+  setupPremiumKeyModule(botInstance);
+  setupAdminToolsModule(botInstance);
+  setupAutoMuteModule(botInstance);
+  setupCallModule(botInstance, OWNER_ID);
+  setupTikTokModule(botInstance, OWNER_ID);
 }
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
-const SECOND_MONGO_URI = process.env.SECOND_MONGO_URI;
+const SECOND_MONGO_URI = process.env.SECOND_MONGO_URI || process.env.MONGO_URI;
 const OWNER_ID = Number(process.env.OWNER_ID);
+const PORT = process.env.PORT || 3000;
 const PORT = process.env.PORT || 3000;
 
 // Env Variables မပြည့်စုံပါက Error ထုတ်ပြီး အေးဆေး ရပ်တန့်မည်
@@ -58,15 +67,6 @@ connectDB();
 // ၃. Telegram Bot Setup နှင့် Global Error Handling
 // ----------------------------------------------------
 const bot = new Bot(BOT_TOKEN);
-setupWelcomeModule(bot);
-setupLeaveModule(bot);
-setupPremiumKeyModule(bot);
-setupAdminToolsModule(bot);
-setupAutoMuteModule(bot);
-setupCallModule(bot, OWNER_ID);
-setupTikTokModule(bot, OWNER_ID);
-setupCloneModule = require('./cloneModule');
-setupCloneModule(bot, OWNER_ID);
 
 // Bot မရပ်သွားစေရန် Global Error Handler ထည့်သွင်းခြင်း
 bot.catch((err) => {
