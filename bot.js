@@ -3,6 +3,8 @@ const { Bot } = require('grammy');
 const mongoose = require('mongoose');
 const { Media, TextReply } = require('./models');
 const setupCloneModule = require('./cloneModule');
+const keepAlive = require('./keepAlive');
+keepAlive();
 
 const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
