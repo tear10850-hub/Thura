@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const { Media, TextReply } = require('./models');
 const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
+const setupPremiumKeyModule = require('./premiumKeyModule');
+const setupAdminToolsModule = require('./adminToolsModule');
 
 // Environment Variables မှ ပညာရပ်ဆိုင်ရာ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
