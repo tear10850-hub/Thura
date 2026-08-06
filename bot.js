@@ -2,8 +2,6 @@ const express = require('express');
 const { Bot } = require('grammy');
 const mongoose = require('mongoose');
 const { Media } = require('./models');
-const keepAlive = require('./keepAlive');
-keepAlive();
 
 const setupWelcomeModule = require('./welcomeModule');
 const setupLeaveModule = require('./leaveModule');
