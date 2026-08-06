@@ -12,6 +12,7 @@ const setupCallModule = require('./setupCallModule');
 
 // သီးသန့် ဖိုင်များ (Modules) ကို Import လုပ်သည့်နေရာတွင် ထည့်ပါ
 const setupStartModule = require('./startModule');
+const setupHelpModule = require('./helpModule');
 
 // Environment Variables မှ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
