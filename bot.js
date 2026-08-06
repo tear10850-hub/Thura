@@ -84,6 +84,9 @@ setupStartModule(bot, OWNER_ID);
 // အခြား Module တွေ မခေါ်ခင် ဒါကို အရင်ဆုံး ထည့်ခေါ်ရပါမယ်
 setupHelpModule(bot, OWNER_ID);
 
+// အခြား Module တွေနဲ့အတူ အောက်နားလေးမှာ ထည့်ခေါ်ပေးပါ
+setupPremiumKeyModule(bot);
+
 bot.catch((err) => {
   console.error(`Error while handling update ${err.ctx.update.update_id}:`);
   console.error(err.error);
