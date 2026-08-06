@@ -78,6 +78,8 @@ setupCallModule(bot, OWNER_ID);
 
 // အခြား Module များ ချိတ်ဆက်ထားသည့်နေရာတွင် ထည့်ပေးပါ
 setupStartModule(bot, OWNER_ID);
+// အခြား Module တွေ မခေါ်ခင် ဒါကို အရင်ဆုံး ထည့်ခေါ်ရပါမယ်
+setupHelpModule(bot, OWNER_ID);
 
 bot.catch((err) => {
   console.error(`Error while handling update ${err.ctx.update.update_id}:`);
