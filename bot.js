@@ -10,6 +10,9 @@ const setupAdminToolsModule = require('./adminToolsModule');
 const setupAutoMuteModule = require('./autoMuteModule');
 const setupCallModule = require('./setupCallModule');
 
+// သီးသန့် ဖိုင်များ (Modules) ကို Import လုပ်သည့်နေရာတွင် ထည့်ပါ
+const setupStartModule = require('./startModule');
+
 // Environment Variables မှ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
