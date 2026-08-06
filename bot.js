@@ -75,6 +75,9 @@ setupLeaveModule(bot);
 setupAutoMuteModule(bot);
 setupCallModule(bot, OWNER_ID);
 
+// အခြား Module များ ချိတ်ဆက်ထားသည့်နေရာတွင် ထည့်ပေးပါ
+setupStartModule(bot, OWNER_ID);
+
 bot.catch((err) => {
   console.error(`Error while handling update ${err.ctx.update.update_id}:`);
   console.error(err.error);
