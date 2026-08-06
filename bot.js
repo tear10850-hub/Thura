@@ -14,6 +14,8 @@ const setupCallModule = require('./setupCallModule');
 const setupStartModule = require('./startModule');
 const setupHelpModule = require('./helpModule');
 
+const setupPremiumKeyModule = require('./setupPremiumKeyModule'); // ဖိုင်အမည်ပေါ်မူတည်ပြီး နာမည်ညှိပေးပါ
+
 // Environment Variables မှ တန်ဖိုးများ ရယူခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const MONGO_URI = process.env.MONGO_URI;
