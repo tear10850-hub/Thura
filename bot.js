@@ -1,4 +1,3 @@
-眼泪༄༢࿔ྀુ:
 const express = require('express');
 const { Bot } = require('grammy');
 const mongoose = require('mongoose');
