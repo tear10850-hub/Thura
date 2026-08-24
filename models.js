@@ -21,7 +21,18 @@ const TextReplySchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+// ⏰ Group သို့မဟုတ် Chat အလိုက် အချိန်သတ်မှတ်ချက်များ သိမ်းဆည်းရန် Schema (အသစ်ထည့်သွင်းခြင်း)
+const BotSettingSchema = new mongoose.Schema({
+  chatId: { type: Number, required: true, unique: true },
+  rtime: { type: String, default: null },   // ယာယီ စာမပြန်ရန် အချိန်
+  ntime: { type: String, default: null },   // ယာယီ စာပြန်ရန် အချိန်
+  artime: { type: String, default: null },  // နေ့စဉ် စာမပြန်ရန် အချိန်
+  antime: { type: String, default: null },  // နေ့စဉ် စာပြန်ရန် အချိန်
+  updatedAt: { type: Date, default: Date.now }
+});
+
 const Media = mongoose.model('Media', MediaSchema);
 const TextReply = mongoose.model('TextReply', TextReplySchema);
+const BotSetting = mongoose.model('BotSetting', BotSettingSchema);
 
-module.exports = { Media, TextReply };
+module.exports = { Media, TextReply, BotSetting };
