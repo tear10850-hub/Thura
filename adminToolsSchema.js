@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const AdminToolsSchema = new mongoose.Schema({
-  chatId: { type: Number, required: true, unique: true },
+  chatId: { 
+    type: Number, 
+    required: true, 
+    unique: true, 
+    index: true 
+  },
   banVideoId: { type: String, default: null },
   muteVideoId: { type: String, default: null },
   unmuteVideoId: { type: String, default: null },
@@ -21,7 +26,12 @@ const AdminToolsSchema = new mongoose.Schema({
 });
 
 const KeySchema = new mongoose.Schema({
-  key: { type: String, required: true, unique: true },
+  key: { 
+    type: String, 
+    required: true, 
+    unique: true, 
+    index: true 
+  },
   isUsed: { type: Boolean, default: false },
   usedBy: { type: Number, default: null },
   usedInChat: { type: Number, default: null },
@@ -36,9 +46,12 @@ const WarnSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Group တစ်ခုအတွင်း User တစ်ယောက်စီရဲ့ Warn Count ကို မြန်ဆန်စွာ ရှာဖွေနိုင်ရန် Compound Index ထည့်သွင်းထားသည်
+WarnSchema.index({ chatId: 1, userId: 1 }, { unique: true });
+
 // Bot Owner သတ်မှတ်ထားသော Bot Profile အချက်အလက်များ Group အားလုံးအတွက် သိမ်းဆည်းရန် Schema
 const GlobalBotProfileSchema = new mongoose.Schema({
-  key: { type: String, default: "global_bot_profile", unique: true },
+  key: { type: String, default: "global_bot_profile", unique: true, index: true },
   botPfMediaId: { type: String, default: null },     // Photo သို့မဟုတ် Video ရဲ့ file_id
   botPfMediaType: { type: String, default: null },   // 'video' သို့မဟုတ် 'photo'
   botCustomName: { type: String, default: "မသတ်မှတ်ရသေးပါ" },
