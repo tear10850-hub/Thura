@@ -1,16 +1,30 @@
 const mongoose = require('mongoose');
 
 const WelcomeSchema = new mongoose.Schema({
-  chatId: { type: Number, required: true, unique: true },
-  welcomeVideoId: { type: String, default: null },
-  welcomeText: { type: String, default: null }, // /settouch ဖြင့် ပြောင်းထားသော စာသား သိမ်းရန်
+  chatId: { 
+    type: Number, 
+    required: true, 
+    unique: true, 
+    index: true // Group အလိုက် Data မြန်မြန်ဆန်ဆန် ရှာဖွေနိုင်ရန် Index ထည့်သွင်းထားသည်
+  },
+  welcomeVideoId: { 
+    type: String, 
+    default: null 
+  },
+  welcomeText: { 
+    type: String, 
+    default: null 
+  },
   customButtons: [
     {
-      text: String, // ခလုတ်အမည်
-      url: String   // Link URL
+      text: { type: String, required: true },
+      url: { type: String, required: true }
     }
-  ], // /addbutton ဖြင့် ထည့်ထားသော Inline Buttons များ သိမ်းရန်
-  updatedAt: { type: Date, default: Date.now }
+  ],
+  updatedAt: { 
+    type: Date, 
+    default: Date.now 
+  }
 });
 
 module.exports = mongoose.model('Welcome', WelcomeSchema);
