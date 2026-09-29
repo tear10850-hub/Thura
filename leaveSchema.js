@@ -1,16 +1,30 @@
 const mongoose = require('mongoose');
 
 const LeaveSchema = new mongoose.Schema({
-  chatId: { type: Number, required: true, unique: true },
-  leaveVideoId: { type: String, default: null },
-  leaveText: { type: String, default: null }, // /setltouch ဖြင့် ပြောင်းထားသော စာသား သိမ်းရန်
+  chatId: { 
+    type: Number, 
+    required: true, 
+    unique: true, 
+    index: true // Group အလိုက် Data မြန်မြန်ဆန်ဆန် ရှာဖွေနိုင်ရန် Index ထည့်သွင်းထားသည်
+  },
+  leaveVideoId: { 
+    type: String, 
+    default: null 
+  },
+  leaveText: { 
+    type: String, 
+    default: null 
+  },
   customButtons: [
     {
-      text: String, // ခလုတ်အမည်
-      url: String   // Link URL
+      text: { type: String, required: true },
+      url: { type: String, required: true }
     }
-  ], // /addlbutton ဖြင့် ထည့်ထားသော Dynamic Buttons များ သိမ်းရန်
-  updatedAt: { type: Date, default: Date.now }
+  ],
+  updatedAt: { 
+    type: Date, 
+    default: Date.now 
+  }
 });
 
 module.exports = mongoose.model('Leave', LeaveSchema);
