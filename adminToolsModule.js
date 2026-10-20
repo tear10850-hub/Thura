@@ -147,9 +147,9 @@ async function unmuteUser(ctx, targetUserId, targetUserMention) {
         can_pin_messages: true
       }
     });
-    await ctx.reply(`✅ Admin ကြီး ${targetUserMention} ၏ Mute ကို အချိုလေးနဲ့ ချက်ချင်း ဖြေပေးလိုက်ပါပြီနော် 😘✨`, { parse_mode: "HTML" });
+    await ctx.reply(`✅ ချစ်စရာလေးကသူ❣ ${targetUserMention} ၏ Mute ကို အချိုလေးနဲ့ ချက်ချင်း ဖြေပေးလိုက်ပါပြီနော် 😘✨`, { parse_mode: "HTML" });
   } catch (err) {
-    await ctx.reply(`⚠️ Mute ဖြေပေးရာတွင် အဆင်မပြေပါ။`);
+    await ctx.reply(`⚠️ ချစ်သူရည်စားရှာရန်owner Dm💞။`);
   }
 }
 
