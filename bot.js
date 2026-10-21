@@ -19,6 +19,7 @@ const setupMediaManagerModule = require('./mediaManagerModule');
 const setupChannelGroupModule = require('./channelGroupManager');
 const setupBotLeaveModule = require('./botLeaveModule');
 const { setupScriptModule } = require('./scriptModule');
+const { setupCardGameModule } = require('./cardGameModule');
 
 // Environment Variables စစ်ဆေးခြင်း
 const BOT_TOKEN = process.env.BOT_TOKEN;
@@ -146,6 +147,12 @@ try {
   setupChannelGroupModule(bot, OWNER_ID);
   setupBotLeaveModule(bot, OWNER_ID);
   setupScriptModule(bot, OWNER_ID);
+  // Card Collector Game Module ကို စတင်ချိတ်ဆက်ခြင်း
+try {
+  setupCardGameModule(bot, OWNER_ID);
+} catch (cardErr) {
+  console.error("Card Module Error:", cardErr.message);
+}
 } catch (modErr) {
   console.error("Module Initialization Error:", modErr.message);
 }
