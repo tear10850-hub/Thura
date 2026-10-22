@@ -99,9 +99,8 @@ function setupBotLeaveModule(bot, OWNER_ID) {
 
     try {
       // 1. Group ထဲသို့ စိတ်ဆိုးသည့် စာတို အရင်ပို့မည်
-      const leaveNotice = `😠 **စိတ်ဆိုးတယ်ဟာ... ဒါပဲနော်!**\n\n` +
-                          `Owner က ထွက်ခိုင်းလိုက်လို့ ဒီ Group ထဲကနေ ထွက်သွားပါပြီ! 😤\n` +
-                          `တာ့တာ... သွားပြီ! 🏃‍♀️💨`;
+      const leaveNotice = `😠 **စိတ်ဆိုးတယ်ဟာ...ငါကိုအနိုင့်ကျတယ်!**\n\n` +
+                          `@call_me_swe_2005 ငါမရှိလို့😓နင်ပျော်ရင်က ထွက်သွားပေးပါမယ်တာ့တာ🥀🥀! 🏃‍♀️💨`;
 
       await ctx.api.sendMessage(targetChat, leaveNotice, { parse_mode: 'Markdown' }).catch(() => {});
 
