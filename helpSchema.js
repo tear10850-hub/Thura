@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Help Page များ၏ Data ပုံစံ သတ်မှတ်ခြင်း (စာမျက်နှာ ၁ မှ ၂၅ အထိ)
+// Help Page များ၏ Data ပုံစံ သတ်မှတ်ခြင်း (Page နံပါတ် အားလုံးအတွက်)
 const helpPageSchema = new mongoose.Schema({
   pageNumber: { 
     type: Number, 
